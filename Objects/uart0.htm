@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\uart0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\uart0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Wed Jan 03 21:10:36 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Tue Jan 09 15:19:42 2018
 <BR><P>
-<H3>Maximum Stack Usage =          8 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         52 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_sh &rArr; __user_setup_stackheap
+__rt_entry_main &rArr; main &rArr; send_String &rArr; strlen
 <P>
 <H3>
 Functions with no stack information
@@ -178,8 +178,8 @@ Global Symbols
 <P><STRONG><a name="[67]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[38]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; exit
+<BR><BR>[Stack]<UL><LI>Max Depth = 52 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; send_String &rArr; strlen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -344,6 +344,12 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
+<P><STRONG><a name="[43]"></a>strlen</STRONG> (Thumb, 62 bytes, Stack size 12 bytes, strlen.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strlen
+</UL>
+<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_String
+</UL>
+
 <P><STRONG><a name="[6a]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
 <P><STRONG><a name="[6b]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -391,41 +397,35 @@ Global Symbols
 <P><STRONG><a name="[2b]"></a>SystemInit</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, system_mkl46z4.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl46z4.o(.text)
 </UL>
-<P><STRONG><a name="[42]"></a>UART0_init</STRONG> (Thumb, 160 bytes, Stack size 0 bytes, uart0.o(i.UART0_init))
+<P><STRONG><a name="[44]"></a>UART0_init</STRONG> (Thumb, 160 bytes, Stack size 0 bytes, uart0.o(i.UART0_init))
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[45]"></a>UART0_transmitter</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uart0.o(i.UART0_transmitter))
-<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_String
-<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[43]"></a>ledsInitialize</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, leds.o(i.ledsInitialize))
+<P><STRONG><a name="[46]"></a>ledsOn</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, leds.o(i.ledsOn))
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[44]"></a>ledsOn</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, leds.o(i.ledsOn))
-<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[42]"></a>send_String</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, uart0.o(i.send_String))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = send_String &rArr; strlen
 </UL>
-
-<P><STRONG><a name="[39]"></a>main</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = main &rArr; send_String
-</UL>
-<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_String
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledsOn
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledsInitialize
-<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_transmitter
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
-</UL>
-
-<P><STRONG><a name="[46]"></a>send_String</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, uart0.o(i.send_String))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = send_String
-</UL>
-<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_transmitter
+<BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[45]"></a>ledsInitialize</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, leds.o(i.ledsInitialize))
+<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[39]"></a>main</STRONG> (Thumb, 34 bytes, Stack size 24 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = main &rArr; send_String &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_String
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledsOn
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledsInitialize
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 <P>
 <H3>

@@ -27,7 +27,17 @@ Project File Date:  01/03/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CMSIS-DAP'
-".\Objects\uart0.axf" - 0 Error(s), 0 Warning(s).
+compiling main.c...
+main.c(24): warning:  #1-D: last line of file ends without a newline
+  }
+main.c(10): warning:  #177-D: variable "text"  was declared but never referenced
+  	char text[]="Hello world!";
+main.c(11): warning:  #177-D: variable "a"  was declared but never referenced
+  	uint8_t a=6;
+main.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=1000 RO-data=220 RW-data=0 ZI-data=352  
+".\Objects\uart0.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,11 +61,11 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_MKL46Z4.s
       Source file:   Device\Source\system_MKL46Z4.c
+      Source file:   Device\Source\ARM\startup_MKL46Z4.s
 
    * Component: ARM::CMSIS:CORE:5.0.2
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

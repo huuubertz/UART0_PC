@@ -6,11 +6,19 @@ int main(void){
 	
 	UART0_init();
 	ledsInitialize();
-	uint8_t a=2;
+	
+	char text[]="Hello world!";
+	uint8_t a=6;
+
+	//c=UART0_reciver();
+	//UART0_transmitter(a);
+	
+	send_String("hello world!\r\n");
 	
 while(1){
 	ledsOn();
-	UART0_transmitter(a);
-	send_String("hello world!\r\n");
+	//send_String(text);
+	//b=UART0_reciver();
+	//UART0_transmitter(a);
 }
 }

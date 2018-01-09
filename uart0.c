@@ -19,7 +19,7 @@ void UART0_init(void){
 	UART0->BDH |= UART_BDH_SBR(div>>8);
 	UART0->BDL |= UART_BDL_SBR(div);
 	// 1-bit stopu
-	UART0->BDH &= ~UART_BDH_SBNS_MASK;
+	UART0->BDH &= ~(UART_BDH_SBNS_MASK);
 	//ramka 8-bit, brak sprzetowego sprawdzania parzystosci
 	UART0->C1 &= ~(UART_C1_M_MASK | UART_C1_PE_MASK);
 	// przerwania
@@ -30,7 +30,7 @@ void UART0_init(void){
 
 void UART0_transmitter(uint8_t data){
 	UART0->D=data;
-	while((UART0->S1 & UART0_S1_TDRE_MASK)) {}
+	while(!(UART0->S1 & UART0_S1_TDRE_MASK)) {}
 }
 
 uint8_t UART0_reciver(void){
@@ -38,7 +38,10 @@ uint8_t UART0_reciver(void){
 	return UART0->D;
 }
 
-void send_String(const char* s){
-	while(*s)
-		UART0_transmitter(*s++);
+void send_String(char tablica[]){
+	
+	for(int i=0;i<=strlen(tablica);i++){
+		UART0->D=tablica[i];
+		while(!(UART0->S1 & UART0_S1_TDRE_MASK));
+	}
 }
